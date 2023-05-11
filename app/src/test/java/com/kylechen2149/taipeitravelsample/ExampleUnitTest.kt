@@ -1,4 +1,4 @@
-package com.example.taipeitravelsample
+package com.kylechen2149.taipeitravelsample
 
 import org.junit.Test
 
