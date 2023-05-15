@@ -5,7 +5,9 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kylechen2149.taipeitravelsample.R
+import com.kylechen2149.taipeitravelsample.adapter.LanguageAdapter
 import com.kylechen2149.taipeitravelsample.adapter.TaipeiTourListDetailAdapter
+import com.kylechen2149.taipeitravelsample.common.model.Language
 import com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse
 import com.kylechen2149.taipeitravelsample.main.viewmodel.TaipeiTourViewModel
 import com.squareup.picasso.Picasso
