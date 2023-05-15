@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kylechen2149.taipeitravelsample.R
 import com.kylechen2149.taipeitravelsample.adapter.TaipeiTourListDetailAdapter
 import com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse
 import com.kylechen2149.taipeitravelsample.main.viewmodel.TaipeiTourViewModel
@@ -32,5 +33,9 @@ fun setTourListDetailItemsAdapter(
 @BindingAdapter("app:imageUrl")
 fun setImageUrl(imageView: ImageView, url: String?) {
     if (url == null || url.isNullOrEmpty()) return
-    Picasso.get().load(url).into(imageView)
+    Picasso.get()
+        .load(url)
+        .placeholder(R.drawable.ic_baseline_error_outline_24)
+        .error(R.drawable.ic_baseline_error_outline_24)
+        .into(imageView)
 }

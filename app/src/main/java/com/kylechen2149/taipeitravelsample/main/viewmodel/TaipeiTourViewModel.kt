@@ -1,7 +1,5 @@
 package com.kylechen2149.taipeitravelsample.main.viewmodel
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse
@@ -9,9 +7,6 @@ import com.kylechen2149.taipeitravelsample.main.repository.TaipeiTourRepository
 import com.kylechen2149.taipeitravelsample.utils.SUB_URL
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 class TaipeiTourViewModel(private val taipeiTourRepository: TaipeiTourRepository) : ViewModel() {
@@ -19,18 +14,42 @@ class TaipeiTourViewModel(private val taipeiTourRepository: TaipeiTourRepository
     val toolbarTitle = MutableStateFlow("TaipeiTour")
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
-    private var page = 1
+    val page = MutableStateFlow(1)
     private val _tourListDetail = MutableStateFlow(listOf<TaipeiTourResponse>())
     val tourListDetail = _tourListDetail.asStateFlow()
+    private val _isLoadingMore = MutableStateFlow(false)
+    val isLoadingMore: StateFlow<Boolean> = _isLoadingMore
+    val loadingMoreData = MutableSharedFlow<Unit>()
+    val isRecordsChanged = MutableSharedFlow<Boolean>()
+    val isSwipeRefresh = MutableSharedFlow<Boolean>()
+
+    fun onLoadingMore() = viewModelScope.launch {
+        loadingMoreData.emit(Unit)
+    }
+
     fun onLanguageClick() = viewModelScope.launch {
 
     }
 
-    fun initData() = viewModelScope.launch {
+    fun initData(_page: Int = 1, isInquiryMore: Boolean = false) = viewModelScope.launch {
         _isLoading.emit(true)
-        taipeiTourRepository.getAllAttractions("zh-tw$SUB_URL", page)
+        taipeiTourRepository.getAllAttractions("zh-tw$SUB_URL", _page)
             .onEach {
-                _tourListDetail.value = it.data
+
+                if(isInquiryMore){
+                    _tourListDetail.value = _tourListDetail.value.plus(it.data)
+                    isRecordsChanged.emit(true)
+                }else{
+                    _tourListDetail.value = it.data
+                }
+
+                if(it.data.isNullOrEmpty())
+                    _isLoadingMore.emit(false)
+                else
+                    _isLoadingMore.emit(true)
+
+                isSwipeRefresh.emit(true)
+
             }
             .catch {
                 Timber.e("error=${it.localizedMessage}")

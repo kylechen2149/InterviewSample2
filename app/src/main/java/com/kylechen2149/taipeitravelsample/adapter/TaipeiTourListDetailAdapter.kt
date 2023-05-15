@@ -21,7 +21,6 @@ class TaipeiTourListDetailAdapter(
         fun bind(item: TaipeiTourResponse, viewModel: TaipeiTourViewModel) {
             binding.item = item
             binding.viewModel = viewModel
-            Timber.d("pic = ${item.getFirstPic()}")
             binding.imageUrl = item.getFirstPic()
             binding.executePendingBindings()
         }
