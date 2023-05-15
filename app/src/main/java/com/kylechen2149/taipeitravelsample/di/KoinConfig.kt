@@ -2,6 +2,7 @@ package com.kylechen2149.taipeitravelsample.di
 
 import com.kylechen2149.taipeitravelsample.main.datasource.TaipeiTourService
 import com.kylechen2149.taipeitravelsample.main.repository.TaipeiTourRepository
+import com.kylechen2149.taipeitravelsample.main.viewmodel.TaipeiTourDetailViewModel
 import com.kylechen2149.taipeitravelsample.main.viewmodel.TaipeiTourViewModel
 import com.kylechen2149.taipeitravelsample.network.getRetrofit
 import com.squareup.moshi.Moshi
@@ -30,6 +31,7 @@ val repoModule = module {
 
 val viewModelModule = module {
     viewModel { TaipeiTourViewModel(get()) }
+    viewModel { TaipeiTourDetailViewModel() }
 }
 
 val koinModules = listOf(appModule, apiModule, repoModule, viewModelModule)

@@ -38,6 +38,7 @@ class TaipeiTourViewModel(private val taipeiTourRepository: TaipeiTourRepository
     val isSwipeRefresh = MutableSharedFlow<Boolean>()
     val showLanguageWindow = MutableSharedFlow<Unit>()
     val onLanguageItemClick = MutableSharedFlow<Language>()
+    val onItemClickToDetail = MutableSharedFlow<TaipeiTourResponse>()
     fun onLoadingMore() = viewModelScope.launch {
         loadingMoreData.emit(Unit)
     }
@@ -75,8 +76,12 @@ class TaipeiTourViewModel(private val taipeiTourRepository: TaipeiTourRepository
             .collect()
     }
 
-    fun onItemClick(item: Language) = viewModelScope.launch {
-        nowLanguage.value = item.code
+    fun onLanguageItemClick(item: Language) = viewModelScope.launch {
+        nowLanguage.value = item.code //save the selected language in case swipe refresh
         onLanguageItemClick.emit(item)
+    }
+
+    fun onItemClick(item: TaipeiTourResponse) = viewModelScope.launch {
+        onItemClickToDetail.emit(item)
     }
 }

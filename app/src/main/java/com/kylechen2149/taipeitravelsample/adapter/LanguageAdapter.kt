@@ -7,10 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kylechen2149.taipeitravelsample.R
 import com.kylechen2149.taipeitravelsample.common.model.Language
 import com.kylechen2149.taipeitravelsample.databinding.ItemLanguageBinding
-import com.kylechen2149.taipeitravelsample.databinding.ItemTaipeiTourBinding
-import com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse
 import com.kylechen2149.taipeitravelsample.main.viewmodel.TaipeiTourViewModel
-import timber.log.Timber
 
 class LanguageAdapter(
     private val items: MutableList<Language>,
@@ -24,7 +21,7 @@ class LanguageAdapter(
             binding.item = item
             binding.viewModel = viewModel
             binding.root.setOnClickListener {
-                viewModel.onItemClick(item)
+                viewModel.onLanguageItemClick(item)
             }
             binding.executePendingBindings()
         }

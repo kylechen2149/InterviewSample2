@@ -12,6 +12,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.kylechen2149.taipeitravelsample.R
@@ -93,6 +94,12 @@ class TaipeiTourFragment : Fragment() {
             onLanguageItemClick.onEach {
                 popupWindow.dismiss()
                 initData(1, false, it.code)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+            onItemClickToDetail.onEach {
+                findNavController().navigate(
+                    TaipeiTourFragmentDirections.actionTaipeiTourFragmentToTaipeiTourDetailFragment(it)
+                )
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
 

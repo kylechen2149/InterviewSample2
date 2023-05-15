@@ -22,6 +22,9 @@ class TaipeiTourListDetailAdapter(
             binding.item = item
             binding.viewModel = viewModel
             binding.imageUrl = item.getFirstPic()
+            binding.root.setOnClickListener {
+                viewModel.onItemClick(item)
+            }
             binding.executePendingBindings()
         }
     }

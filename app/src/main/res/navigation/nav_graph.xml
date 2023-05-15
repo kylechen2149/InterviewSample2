@@ -8,5 +8,19 @@
         android:id="@+id/taipeiTourFragment"
         android:name="com.kylechen2149.taipeitravelsample.main.view.TaipeiTourFragment"
         android:label="TaipeiTourFragment"
-        tools:layout="@layout/fragment_taipei_tour"/>
+        tools:layout="@layout/fragment_taipei_tour">
+        <action
+            android:id="@+id/action_taipeiTourFragment_to_taipeiTourDetailFragment"
+            app:destination="@id/taipeiTourDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taipeiTourDetailFragment"
+        android:name="com.kylechen2149.taipeitravelsample.main.view.TaipeiTourDetailFragment"
+        android:label="TaipeiTourDetailFragment"
+        tools:layout="@layout/fragment_taipei_tour_detail">
+        <argument
+            android:name="tourDetail"
+            app:argType="com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse"
+            />
+    </fragment>
 </navigation>
