@@ -1,7 +1,6 @@
 package com.kylechen2149.taipeitravelsample.main.view
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,20 +42,27 @@ class TaipeiTourDetailFragment : Fragment() {
         detail = args.tourDetail
         viewModel = this@TaipeiTourDetailFragment.taipeiTourDetailViewModel.apply {
 
-            val imageBanner = ImageBannerAdapter(args.tourDetail.images)
-            banner.apply {
-                setAutoTurningTime(3000)
-                adapter = imageBanner
-            }
+            //in case no images can show
+            if(args.tourDetail.images.isNotEmpty()){
+                val imageBanner = ImageBannerAdapter(args.tourDetail.images)
+                banner.apply {
+                    setAutoTurningTime(3000)
+                    adapter = imageBanner
+                }
+            }else
+                banner.visibility = View.GONE
+
 
             onBackClick.onEach {
                 findNavController().popBackStack()
             }.launchIn(viewLifecycleOwner.lifecycleScope)
-        }
-        tvLink.apply {
-            movementMethod = LinkMovementMethod.getInstance()
-            setLinkTextColor(resources.getColor(R.color.colorPrimary))
-            linksClickable = true
+
+            onUrlClick.onEach {
+                if(it.isEmpty()) return@onEach
+                findNavController().navigate(
+                    TaipeiTourDetailFragmentDirections.actionTaipeiTourDetailFragmentToTaipeiTourDetailWebView(it)
+                )
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
         lifecycleOwner = this@TaipeiTourDetailFragment.viewLifecycleOwner
     }.root

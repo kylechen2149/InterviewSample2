@@ -13,7 +13,13 @@ import timber.log.Timber
 class TaipeiTourDetailViewModel : ViewModel() {
 
     val onBackClick = MutableSharedFlow<Unit>()
+    val onUrlClick = MutableSharedFlow<String>()
     fun onBackClick() = viewModelScope.launch {
         onBackClick.emit(Unit)
+    }
+
+    fun onUrlClick(url: String) = viewModelScope.launch {
+        Timber.d("url = $url")
+        onUrlClick.emit(url)
     }
 }

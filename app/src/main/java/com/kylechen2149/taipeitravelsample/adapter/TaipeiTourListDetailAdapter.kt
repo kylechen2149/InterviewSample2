@@ -8,7 +8,6 @@ import com.kylechen2149.taipeitravelsample.R
 import com.kylechen2149.taipeitravelsample.databinding.ItemTaipeiTourBinding
 import com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse
 import com.kylechen2149.taipeitravelsample.main.viewmodel.TaipeiTourViewModel
-import timber.log.Timber
 
 class TaipeiTourListDetailAdapter(
     private val items: MutableList<TaipeiTourResponse>,

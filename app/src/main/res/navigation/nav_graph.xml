@@ -22,5 +22,18 @@
             android:name="tourDetail"
             app:argType="com.kylechen2149.taipeitravelsample.main.model.TaipeiTourResponse"
             />
+        <action
+            android:id="@+id/action_taipeiTourDetailFragment_to_taipeiTourDetailWebView"
+            app:destination="@id/taipeiTourDetailWebView" />
+    </fragment>
+    <fragment
+        android:id="@+id/taipeiTourDetailWebView"
+        android:name="com.kylechen2149.taipeitravelsample.common.view.TaipeiTourDetailWebView"
+        android:label="TaipeiTourDetailWebView"
+        tools:layout="@layout/fragment_taipei_tour_webview">
+        <argument
+            android:name="url"
+            app:argType="string"
+            />
     </fragment>
 </navigation>

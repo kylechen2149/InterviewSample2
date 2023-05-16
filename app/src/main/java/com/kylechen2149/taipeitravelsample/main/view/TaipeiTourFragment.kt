@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -86,7 +87,7 @@ class TaipeiTourFragment : Fragment() {
                     isOutsideTouchable = true
                     isFocusable = true
                     setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                    showAsDropDown(multiLanguage)
+                    showAtLocation(inflater.inflate(R.layout.layout_popupwindow_language, null), Gravity.CENTER, 0, 0)
                 }
 
             }.launchIn(viewLifecycleOwner.lifecycleScope)

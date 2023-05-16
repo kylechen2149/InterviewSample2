@@ -4,4 +4,5 @@
     <string name="load_more">To load more, Click or pull up. </string>
     <string name="text_address">Address:\n%s</string>
     <string name="text_last_update_time">Last update time:\n%s</string>
+    <string name="text_url_style"><u><font color="#0085ff">%s</font></u></string>
 </resources>
